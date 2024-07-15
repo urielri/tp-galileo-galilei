@@ -1,0 +1,31 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+}
+
+.content-grid-rows {
+  display: grid;
+}
+
+.content-grid,
+.full-width {
+  display: grid;
+  grid-template-columns:
+    [full-width-start] var(--space-column)
+    [breakout-start] 1fr [breakout-end] var(--space-column)
+    [full-width-end];
+}
+
+.content-grid > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: breakout;
+}
+
+.content-grid > .breakout {
+  grid-column: breakout;
+}
+
+.content-grid > .full-width {
+  grid-column: full-width;
+}
