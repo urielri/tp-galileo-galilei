@@ -22,38 +22,27 @@ const items = [
 ];
 
 /**
- * Function getArticles
  * Obtiene los articulos de la BD
- * @returns {{id: string, title: string, description: string}[]} Retorna un Array con los articulos
+ * @returns {Promise<{id: string, title: string, description: string}[]>} Retorna un Array con los articulos
  */
 
-export async function getArticles() {
+export async function getData() {
   const data = await getScientists();
 
   return data;
 }
-
 /**
- * Function createArticle
  * Crea un HTMLElement base del articulo a visualizar
- * @returns {Article}
+ * @returns {Scientist}
  *
  */
-export function createArticleBase() {
-  //const containerArticle = document.createElement("article");
-  /**
-   * Aplico propiedades basicas al container
-   */
-  //  containerArticle.classList.add("article");
-  // containerArticle.id = "article-";
-
-  // const title = document.createElement("h3");
-  const article = new Article();
-  article.build();
-  return article;
+export function createScientistBase() {
+  const scientist = new Scientist();
+  scientist.build();
+  return scientist;
 }
 
-export class Article {
+export class Scientist {
   container = document.createElement("article");
   title = document.createElement("h3");
   description = document.createElement("p");
@@ -69,8 +58,8 @@ export class Article {
   }
 
   build() {
-    this.container.classList.add("article");
-    this.container.id = "article-";
+    this.container.classList.add("scientist");
+    this.container.id = "scientist-";
     this.container.append(this.title);
     this.container.append(this.description);
   }
@@ -80,42 +69,40 @@ export class Article {
   toInyect() {}
 }
 /**
- * Function articleFactory
  * Obtiene los datos de la BD, crea y construye el articulo que se va a mostrar al usuario
  *
- * @returns {Article[]} HTMLElement[] - Retorna un Array con el HTMLElement creado e hidratado, listo para ser visualizado.
+ * @returns {Promise<Scientist[]>} HTMLElement[] - Retorna un Array con el HTMLElement creado e hidratado, listo para ser visualizado.
  */
-export async function articleFactory() {
-  const data = await getArticles();
-  const articles = data.map((element) =>
-    buildArticleCard(
-      createArticleBase(),
+export async function scientistFactory() {
+  const data = await getScientists();
+  const scientists = data.map((element) =>
+    buildScientistCard(
+      createScientistBase(),
       element.id,
       element.name,
       element.description,
     ),
   );
-  return articles;
+  return scientists;
 }
 
 /**
- * Function buildArticleCard
- * Hidrata con los datos obtenidos de la BD al HTMLArticleBase
- * @param {Article} article
+ * Hidrata con los datos obtenidos de la BD al HTMLScientistBase
+ * @param {Scientist}scientist
  * @param {string} id
  * @param {string} title
  * @param {string} description
- * @returns {Article}
+ * @returns {Scientist}
  */
-export function buildArticleCard(article, id, title, description) {
-  article.setProperty("container", (object) => {
+export function buildScientistCard(scientist, id, title, description) {
+  scientist.setProperty("container", (object) => {
     object.id = `${object.id}${id}`;
   });
-  article.setProperty("title", (object) => {
+  scientist.setProperty("title", (object) => {
     object.innerText = title;
   });
-  article.setProperty("description", (object) => {
+  scientist.setProperty("description", (object) => {
     object.innerText = description;
   });
-  return article;
+  return scientist;
 }
