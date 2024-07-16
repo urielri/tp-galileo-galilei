@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::group(['middleware' => 'cors'], function () {
 Route::post("/scientist", [Scientists::class, 'createScientist']);
 Route::post("scientist/init", [Scientists::class, 'build']);
 Route::get('/', function () {
@@ -38,5 +37,4 @@ Route::get("/scientist/{id}", [Scientists::class, 'getScientist']);
 
 
 
-});
 
