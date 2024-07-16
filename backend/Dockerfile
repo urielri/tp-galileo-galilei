@@ -1,7 +1,7 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
 COPY . .
-
+WORKDIR /var/www/html
 # Image config
 ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
