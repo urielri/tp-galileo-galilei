@@ -3,7 +3,7 @@ import { API_LOCAL, API_CLOUD } from "./constants.js";
 export function getEnvironment() {
   const origin = window.location.origin;
   if (origin.match(/localhost/) || origin.match(/127.0.0.1/)) {
-    return API_LOCAL;
+    return API_CLOUD;
   }
   return API_CLOUD;
 }

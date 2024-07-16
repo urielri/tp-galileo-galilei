@@ -23,7 +23,7 @@ const items = [
 
 /**
  * Obtiene los articulos de la BD
- * @returns {Promise<{id: string, title: string, description: string}[]>} Retorna un Array con los articulos
+ * @returns {Promise<{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }[]>} Retorna un Array con los articulos
  */
 
 export async function getData() {
@@ -42,31 +42,75 @@ export function createScientistBase() {
   return scientist;
 }
 
+/**
+ * @param {HTMLElement} name
+ * @param {HTMLElement} web
+ */
+function buildName(name, web) {}
+
+/**
+ * @param {HTMLElement} tags
+ * @param {string[]} data
+ */
+function buildPhrases() {}
+
 export class Scientist {
   container = document.createElement("article");
-  title = document.createElement("h3");
-  description = document.createElement("p");
+  aboutContainer = document.createElement("div");
+  career = document.createElement("span");
+  image = document.createElement("img");
+  name = document.createElement("h3");
+  about = document.createElement("p");
+  phrases = document.createElement("div");
+  tags = document.createElement("div");
+  web = document.createElement("a");
+  expand = false;
   constructor() {}
 
   /**
-   * @param {'title' | 'description' | 'container'} element
+   * @param {'name' | 'tags'| 'image' | 'about' | 'container' | 'aboutContainer' | 'phrases' | 'web'} element
    * @param {(object: HTMLElement) => void} cb
    */
   setProperty(element, cb) {
     if (typeof element !== "string") return;
     cb(this[element]);
   }
-
-  build() {
-    this.container.classList.add("scientist");
-    this.container.id = "scientist-";
-    this.container.append(this.title);
-    this.container.append(this.description);
-  }
   /**
-   * @returns {HTMLElement}
+   *
+   * construye el componente a ser inyectado en el DOM
    */
-  toInyect() {}
+  build() {
+    /**
+     * CLASSES
+     */
+    this.container.classList.add("scientist");
+    this.tags.classList.add("tags");
+    this.phrases.classList.add("phrases");
+    this.web.classList.add("web");
+    this.aboutContainer.classList.add("aboutContainer");
+
+    /*
+     * CONTAINER
+     */
+    this.container.id = "scientist-";
+    /** BIND */
+    this.container.append(this.image);
+    this.container.append(this.aboutContainer);
+    //buildName(this.name, this.web);
+    this.container.append(this.tags.cloneNode());
+    //this.container.append(this.about);
+    buildPhrases(this.phrases);
+
+    /**
+     * ABOUT CONTAINER
+     */
+    this.aboutContainer.id = "aboutContaienr";
+
+    /** BIND */
+    this.aboutContainer.append(this.name);
+    this.aboutContainer.append(this.career);
+    this.aboutContainer.append(this.tags);
+  }
 }
 /**
  * Obtiene los datos de la BD, crea y construye el articulo que se va a mostrar al usuario
@@ -76,12 +120,7 @@ export class Scientist {
 export async function scientistFactory() {
   const data = await getScientists();
   const scientists = data.map((element) =>
-    buildScientistCard(
-      createScientistBase(),
-      element.id,
-      element.name,
-      element.description,
-    ),
+    buildScientistCard(createScientistBase(), element),
   );
   return scientists;
 }
@@ -89,20 +128,29 @@ export async function scientistFactory() {
 /**
  * Hidrata con los datos obtenidos de la BD al HTMLScientistBase
  * @param {Scientist}scientist
- * @param {string} id
- * @param {string} title
- * @param {string} description
+ * @param {{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }} data
  * @returns {Scientist}
  */
-export function buildScientistCard(scientist, id, title, description) {
+export function buildScientistCard(
+  scientist,
+  { id, image, name, about, tags, phrases, web, career },
+) {
   scientist.setProperty("container", (object) => {
     object.id = `${object.id}${id}`;
   });
-  scientist.setProperty("title", (object) => {
-    object.innerText = title;
+  scientist.setProperty("image", (object) => {
+    object.src = image;
   });
-  scientist.setProperty("description", (object) => {
-    object.innerText = description;
+  scientist.setProperty("name", (object) => {
+    object.innerText = name;
   });
+  scientist.setProperty("about", (object) => {
+    object.innerText = about;
+  });
+  scientist.setProperty("tags", (object) => {});
   return scientist;
+}
+
+function tagComponent() {
+  const tag = document.createElement("div");
 }
