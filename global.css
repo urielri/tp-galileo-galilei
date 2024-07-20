@@ -66,3 +66,8 @@ lo {
     --space-column: calc(var(--size) * 6);
   }
 }
+
+h1 {
+  font-size: 3em;
+  color: var(--black-00);
+}

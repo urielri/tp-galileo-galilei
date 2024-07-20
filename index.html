@@ -6,6 +6,7 @@
     <title>TP Rivero Uriel</title>
     <link href="./global.css" rel="stylesheet" />
     <link rel="stylesheet" href="./src/layout.css" />
+    <link rel="stylesheet" href="./src/content.css" />
     <script blocking="render" async type="module" src="./main.js"></script>
   </head>
   <body>
@@ -19,13 +20,34 @@
           />
         </div>
       </header>
-      <div class="items content-grid-rows content-grid" id="articles"></div>
+      <section class="content-grid-rows content-grid">
+        <div class="items" id="articles"></div>
+      </section>
+      <footer class="content-grid-rows content-grid">
+        <div class="me">
+          <h3>Rivero Uriel</h3>
+
+          <div class="social">
+            <div class="icon">
+              <a href="https://github.com/urielri" target="_blank"
+                ><img src="./src/public/github.svg"
+              /></a>
+            </div>
+            <div class="icon">
+              <a href="https://www.behance.net/urielri" target="_blank"
+                ><img src="./src/public/behance.svg"
+              /></a>
+            </div>
+            <div class="icon">
+              <a
+                href="https://www.linkedin.com/in/uriel-rivero/"
+                target="_blank"
+                ><img src="./src/public/linkedin.svg"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
-    <footer class="content-grid-rows content-grid">
-      <div class="me">
-        <h4>Rivero Uriel</h4>
-        <a href="" target="_blank" />
-      </div>
-    </footer>
   </body>
 </html>

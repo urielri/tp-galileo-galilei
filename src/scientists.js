@@ -42,18 +42,6 @@ export function createScientistBase() {
   return scientist;
 }
 
-/**
- * @param {HTMLElement} name
- * @param {HTMLElement} web
- */
-function buildName(name, web) {}
-
-/**
- * @param {HTMLElement} tags
- * @param {string[]} data
- */
-function buildPhrases() {}
-
 export class Scientist {
   container = document.createElement("article");
   aboutContainer = document.createElement("div");
@@ -87,7 +75,19 @@ export class Scientist {
     this.tags.classList.add("tags");
     this.phrases.classList.add("phrases");
     this.web.classList.add("web");
+    this.image.classList.add("avatar");
     this.aboutContainer.classList.add("aboutContainer");
+
+    /**
+     * EVENTS
+     */
+
+    this.container.addEventListener("click", (e) => {
+      if (!this.container.classList.contains("modal")) {
+        createPortal();
+        this.container.classList.add("modal");
+      }
+    });
 
     /*
      * CONTAINER
@@ -96,15 +96,20 @@ export class Scientist {
     /** BIND */
     this.container.append(this.image);
     this.container.append(this.aboutContainer);
-    //buildName(this.name, this.web);
-    this.container.append(this.tags.cloneNode());
-    //this.container.append(this.about);
-    buildPhrases(this.phrases);
+    this.container.append(this.web);
+    this.container.append(this.about);
+    this.container.append(this.phrases);
+    //this.container.append(this.tags.cloneNode());
 
     /**
      * ABOUT CONTAINER
      */
     this.aboutContainer.id = "aboutContaienr";
+
+    /**
+     * CAREER
+     * */
+    this.career.classList.add("career");
 
     /** BIND */
     this.aboutContainer.append(this.name);
@@ -138,19 +143,95 @@ export function buildScientistCard(
   scientist.setProperty("container", (object) => {
     object.id = `${object.id}${id}`;
   });
+
   scientist.setProperty("image", (object) => {
     object.src = image;
   });
+
   scientist.setProperty("name", (object) => {
     object.innerText = name;
   });
+
   scientist.setProperty("about", (object) => {
     object.innerText = about;
   });
-  scientist.setProperty("tags", (object) => {});
+
+  scientist.setProperty("career", (object) => {
+    object.innerText = career;
+  });
+
+  scientist.setProperty("tags", (object) => {
+    tags.map((value) => object.append(tagComponent(value)));
+  });
+
+  scientist.setProperty("web", (object) => {
+    hyperlinkComponent(object, name, web);
+  });
+
+  scientist.setProperty("phrases", (object) => {
+    phrasesComponent(object, phrases);
+  });
+
+  scientist.container.insertBefore(
+    scientist.tags.cloneNode(true),
+    scientist.web.nextSibling,
+  );
   return scientist;
 }
 
-function tagComponent() {
+/**
+ * @param {string} value
+ */
+function tagComponent(value) {
   const tag = document.createElement("div");
+  tag.classList.add("tag");
+  const span = document.createElement("span");
+  span.innerText = value;
+  tag.append(span);
+  return tag;
+}
+
+/**
+ * @param {HTMLElement} container
+ * @param {string} text
+ * @param {string} href
+ */
+function hyperlinkComponent(container, text, href) {
+  container.classList.add("name");
+  container.href = href;
+  container.target = "_blank";
+  const span = document.createElement("span");
+  span.innerText = text;
+  const icon = document.createElement("img");
+  icon.src = "/src/public/hyperlink.svg";
+  container.append(span);
+  container.append(icon);
+}
+
+/**
+ * @param {HTMLElement} container
+ * @param {string[]} phrases
+ */
+function phrasesComponent(container, phrases) {
+  const title = document.createElement("h3");
+  title.innerText = "Frases";
+  container.append(title);
+  phrases.map((value) => {
+    const p = document.createElement("p");
+    p.innerText = value;
+    container.append(p);
+  });
+}
+
+function createPortal() {
+  const portal = document.createElement("div");
+  portal.classList.add("portal");
+  portal.id = "portal";
+  portal.addEventListener("click", () => {
+    const modal = document.getElementsByClassName("modal");
+    modal[0].classList.remove("modal");
+    portal.remove();
+  });
+
+  document.body.children[0].append(portal);
 }
