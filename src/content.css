@@ -7,7 +7,7 @@ header {
     flex-wrap: wrap;
     gap: var(--size);
     align-items: center;
-
+    justify-content: center;
     .tag {
       padding: calc(var(--size) / 2) calc(var(--size) * 1.5);
       color: var(--black-01);
