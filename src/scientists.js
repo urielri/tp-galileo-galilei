@@ -1,4 +1,8 @@
-import { getScientists } from "./service.js";
+import {
+  getScientists,
+  getScientistsByTag,
+  getScientistsByTextSearched,
+} from "./service.js";
 
 const items = [
   {
@@ -20,16 +24,37 @@ const items = [
       "hola pabloBut I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
   },
 ];
-
 /**
- * Obtiene los articulos de la BD
- * @returns {Promise<{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }[]>} Retorna un Array con los articulos
+ * @typedef {'default' | 'tag' | 'search'} Type
+ * @typedef  {{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }} ScientistModel
  */
+/**
+ * @param {Type} type
+ * @param {string | undefined} value
+ * Obtiene los articulos de la BD
+ * @returns {Promise<ScientistModel[]>} Retorna un Array con los articulos
+ */
+export async function getData(type, value) {
+  if (type === "search" && !value)
+    throw new Error("Value no debe ser undefined");
 
-export async function getData() {
-  const data = await getScientists();
+  /**
+   * @type {ScientistModel[] | null}
+   */
+  let response = null;
+  switch (type) {
+    case "default":
+      response = await getScientists();
+      break;
+    case "tag":
+      response = await getScientistsByTag(value);
+      break;
+    case "search":
+      response = await getScientistsByTextSearched(value);
+      break;
+  }
 
-  return data;
+  return response;
 }
 /**
  * Crea un HTMLElement base del articulo a visualizar
@@ -117,18 +142,6 @@ export class Scientist {
     this.aboutContainer.append(this.tags);
   }
 }
-/**
- * Obtiene los datos de la BD, crea y construye el articulo que se va a mostrar al usuario
- *
- * @returns {Promise<Scientist[]>} HTMLElement[] - Retorna un Array con el HTMLElement creado e hidratado, listo para ser visualizado.
- */
-export async function scientistFactory() {
-  const data = await getScientists();
-  const scientists = data.map((element) =>
-    buildScientistCard(createScientistBase(), element),
-  );
-  return scientists;
-}
 
 /**
  * Hidrata con los datos obtenidos de la BD al HTMLScientistBase
@@ -177,6 +190,35 @@ export function buildScientistCard(
     scientist.web.nextSibling,
   );
   return scientist;
+}
+
+/**
+ * Obtiene los datos de la BD, crea y construye el articulo que se va a mostrar al usuario
+ * @param {Type | undefined} type
+ * @param {string | undefined} value
+ * @returns {Promise<void>}
+ */
+export async function scientistFactory(type, value) {
+  /*
+   * Obtenemos los articulos
+   */
+  const data = await getData(type, value);
+  const scientists = data.map((element) =>
+    buildScientistCard(createScientistBase(), element),
+  );
+
+  const scientistsDiv = document.getElementById("articles");
+  console.log(scientistsDiv.children.length);
+  if (scientistsDiv.children.length > 0) {
+    let l = scientistsDiv.children.length;
+    for (let i = 0; i < l; i++) {
+      scientistsDiv.children[0].remove();
+    }
+  }
+  /**
+   *  Inyectamos los articulos creados con JS en el DOM
+   */
+  scientists.map((e) => scientistsDiv.append(e.container));
 }
 
 /**

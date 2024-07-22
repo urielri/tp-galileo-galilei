@@ -2,6 +2,27 @@ header {
   margin-top: calc(var(--size) * 4);
   justify-items: center;
   gap: calc(var(--size) * 3);
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--size);
+    align-items: center;
+
+    .tag {
+      padding: calc(var(--size) / 2) calc(var(--size) * 1.5);
+      color: var(--black-01);
+      font-weight: 500;
+      border-radius: calc(var(--size) * 2);
+      transition: all 0.2s;
+      cursor: pointer;
+      &:hover {
+        filter: brightness(0.97);
+      }
+    }
+    .active {
+      background-color: var(--white-00);
+    }
+  }
 }
 footer {
   align-items: center;
@@ -161,7 +182,7 @@ section {
   z-index: 5;
   text-align: center;
   animation-name: open;
-  animation-duration: 0.2s;
+  animation-duration: 0.1s;
   animation-fill-mode: forwards;
   animation-delay: 0.01s;
   .avatar {
