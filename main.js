@@ -38,8 +38,9 @@ async function finder() {
     if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
       render = true;
-      if (value !== "" && render) {
-        scientistFactory("search", value);
+      if (render) {
+        value !== "" && scientistFactory("search", value);
+        value === "" && scientistFactory("default");
         render = false;
       }
     }, 1000);

@@ -4,26 +4,6 @@ import {
   getScientistsByTextSearched,
 } from "./service.js";
 
-const items = [
-  {
-    id: "0",
-    name: "Harry",
-    description:
-      "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
-  },
-  {
-    id: "1",
-    name: "Hendrick",
-    description:
-      "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
-  },
-  {
-    id: "2",
-    name: "Tomshon",
-    description:
-      "hola pabloBut I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness.",
-  },
-];
 /**
  * @typedef {'default' | 'tag' | 'search'} Type
  * @typedef  {{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }} ScientistModel
@@ -107,7 +87,7 @@ export class Scientist {
      * EVENTS
      */
 
-    this.container.addEventListener("click", (e) => {
+    this.container.addEventListener("click", () => {
       if (!this.container.classList.contains("modal")) {
         createPortal();
         this.container.classList.add("modal");
@@ -146,7 +126,7 @@ export class Scientist {
 /**
  * Hidrata con los datos obtenidos de la BD al HTMLScientistBase
  * @param {Scientist}scientist
- * @param {{id: string, name: string, about: string, tags: string[], phrases: string[], web: string, career: string, image: string }} data
+ * @param {ScientistModel} data
  * @returns {Scientist}
  */
 export function buildScientistCard(

@@ -22,7 +22,6 @@ export class Tag {
   }
 }
 
-let tagSelected = "";
 export class TagComponent extends Tag {
   component = document.createElement("div");
   /**
@@ -39,14 +38,16 @@ export class TagComponent extends Tag {
     span.innerText = this.name;
     this.component.append(span);
 
-    this.component.addEventListener("click", (event) => {
+    this.component.addEventListener("click", () => {
       if (this.component.classList.contains("active")) return;
       const tags = document.getElementsByClassName("active");
       for (let i = 0; i < tags.length; i++) {
         tags[i].id !== this.component.id && tags[i].classList.remove("active");
       }
       this.component.classList.add("active");
-      scientistFactory("tag", this.name);
+      this.name === "todos"
+        ? scientistFactory("default")
+        : scientistFactory("tag", this.name);
     });
   }
 }
@@ -56,8 +57,8 @@ export class TagComponent extends Tag {
  */
 export async function tagFactory() {
   const data = await getData();
-
-  const component = data.map(({ id, name }) => {
+  const array = [...data, new Tag(data.length + 1, "todos")].toReversed();
+  const component = array.map(({ id, name }) => {
     const tag = new TagComponent(`tag-${id}`, name);
     tag.build();
     return tag;
