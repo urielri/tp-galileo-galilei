@@ -36,6 +36,28 @@ class Scientists extends Controller
            $object->{'phrases'} = decodeArray($scientist[0], 'phrases');
             return response()->json($object);
         }
+        public function getScientistsByTag(string $tag): JsonResponse {
+        $scientists = DB::table('scientist')->whereJsonContains('tags', $tag)->get();
+        $array = array();
+        for ($i=0; $i < count($scientists); $i++) {
+            $object = $scientists[$i];
+           $object->{'tags'} = decodeArray($scientists[$i], 'tags');
+           $object->{'phrases'} = decodeArray($scientists[$i], 'phrases');
+            $array[] = $object;
+        }
+        return response()->json($array);
+        }
+        public function getScientistsByTextSearched(string $text):JsonResponse {
+        $scientists = DB::select("SELECT * FROM scientist WHERE phrases LIKE '%$text%'");
+        $array = array();
+        for ($i=0; $i < count($scientists); $i++) {
+            $object = $scientists[$i];
+           $object->{'tags'} = decodeArray($scientists[$i], 'tags');
+           $object->{'phrases'} = decodeArray($scientists[$i], 'phrases');
+            $array[] = $object;
+        }
+        return response()->json($array);
+        }
 
     public function createScientist(Request $request):JsonResponse {
         $bodyEncode = $request->getContent();
@@ -54,7 +76,7 @@ class Scientists extends Controller
             $table->string('web');
             $table->json('tags');
             $table->string('about');
-            $table->json('phrases');
+            $table->json('phrases')->index('phrases');
 
         });
             return "Table created successful";

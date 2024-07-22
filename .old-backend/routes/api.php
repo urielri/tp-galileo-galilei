@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Scientists\Scientists;
+use App\Http\Tags\Tags;
 
 use Illuminate\Support\Facades\DB;
 /*
@@ -35,8 +35,13 @@ Route::get('/', function () {
 
 Route::get("/scientists", [Scientists::class, 'getScientists']);
 Route::get("/scientist/{id}", [Scientists::class, 'getScientist']);
+Route::get("/scientists/{tag}", [Scientists::class, 'getScientistsByTag']);
+Route::get("/scientists/search/{text}", [Scientists::class, 'getScientistsByTextSearched']);
 
 
+Route::get("/tags", [Tags::class, 'getTags']);
+Route::post("/tags/init", [Tags::class, 'build']);
+Route::post("/tag", [Tags::class, 'createTag']);
 
 });
 
