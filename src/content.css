@@ -60,7 +60,6 @@ section {
     gap: calc(var(--size) * 4);
   }
 }
-
 .scientist {
   position: relative;
   cursor: pointer;
