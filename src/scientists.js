@@ -91,6 +91,7 @@ export class Scientist {
       if (!this.container.classList.contains("modal")) {
         createPortal();
         this.container.classList.add("modal");
+        document.body.classList.add("modalOpen");
       }
     });
 
@@ -252,6 +253,7 @@ function createPortal() {
   portal.addEventListener("click", () => {
     const modal = document.getElementsByClassName("modal");
     modal[0].classList.remove("modal");
+    document.body.classList.remove("modalOpen");
     portal.remove();
   });
 

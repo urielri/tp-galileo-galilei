@@ -202,6 +202,38 @@ section {
   animation-name: start;
   animation-duration: 0.2s;
   animation-fill-mode: forwards;
+  overflow: hidden;
+}
+
+.modalOpen {
+  overflow: hidden;
+}
+@media screen and (min-width: 320px) {
+  .portal {
+    background-color: rgba(10, 10, 10, 0.38);
+    backdrop-filter: blur(calc(var(--blur) * 3));
+  }
+  .scientist {
+    backdrop-filter: blur(0px);
+    background-color: transparent;
+  }
+  .search {
+    min-width: 100%;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .portal {
+    backdrop-filter: blur(0px);
+    background-color: rgba(24, 24, 24, 0.3);
+  }
+  .scientist {
+    background-color: rgba(102, 102, 102, 0.18);
+    backdrop-filter: blur(calc(var(--blur) * 3));
+  }
+  .search {
+    min-width: 320px;
+  }
 }
 
 @keyframes start {
