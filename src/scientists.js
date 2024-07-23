@@ -189,7 +189,6 @@ export async function scientistFactory(type, value) {
   );
 
   const scientistsDiv = document.getElementById("articles");
-  console.log(scientistsDiv.children.length);
   if (scientistsDiv.children.length > 0) {
     let l = scientistsDiv.children.length;
     for (let i = 0; i < l; i++) {
