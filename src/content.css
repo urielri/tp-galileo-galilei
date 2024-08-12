@@ -77,7 +77,7 @@ section {
   .items {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(auto, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(auto, 240px));
     gap: calc(var(--size) * 4);
   }
 }
