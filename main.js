@@ -1,6 +1,7 @@
 import { health } from "./src/service.js";
 import { scientistFactory } from "./src/scientists.js";
 import { tagFactory } from "./src/tags.js";
+import { finder } from "./src/utils.js";
 export async function init() {
   const connection = await health();
   console.log("Hola, se inicializa function init()");
@@ -18,33 +19,8 @@ export async function init() {
    */
   tags.map((e) => tagsDiv.append(e.component));
 
-  await finder();
+  await finder(scientistFactory);
   await scientistFactory("default");
-}
-
-/**
- * Le damos funcionalidad al input text que va a ser nuestro buscador
- *
- * El timeout previene una saturacion a la APIrest, asi, una vez que el usuario deja de escribir,
- * recien entonces se realizara la consulta al servidor
- */
-async function finder() {
-  const input = document.getElementById("search");
-  let value = "";
-  let timer = null;
-  input.addEventListener("keyup", async (event) => {
-    let render = false;
-    value = event.target.value;
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-      render = true;
-      if (render) {
-        value !== "" && scientistFactory("search", value);
-        value === "" && scientistFactory("default");
-        render = false;
-      }
-    }, 1000);
-  });
 }
 
 await init();
