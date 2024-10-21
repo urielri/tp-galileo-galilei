@@ -1,29 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestion</title>
-    <link rel="stylesheet" href="./src/content.css" />
-    <link rel="stylesheet" href="./global.css" />
-    <script blocking="render" async type="module" src="./src/manage/main.js"></script>
-  </head>
-  <body>
-    <div class="root">
-      <div class="manage">
-        <header class="manage-actions">
-          <h2>ABM</h2>
-          <div class="search">
-            <img src="./src/public/search.svg" /><input
-              type="text"
-              id="search"
-              autocomplete="off"
-              placeholder="Buscar texto en frases"
-            />
-          </div>
-        </header>
-        <main id="list"></main>
-      </div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestion</title>
+        <link rel="stylesheet" href="./src/content.css" />
+        <link rel="stylesheet" href="./global.css" />
+        <script
+            blocking="render"
+            async
+            type="module"
+            src="./src/manage/main.js"
+        ></script>
+    </head>
+    <body>
+        <div class="root">
+            <div class="manage">
+                <header class="manage-actions">
+                    <h2>ABM</h2>
+                    <div class="search">
+                        <img src="./src/public/search.svg" /><input
+                            type="text"
+                            id="search"
+                            autocomplete="off"
+                            placeholder="Buscar texto en frases"
+                        />
+                    </div>
+                </header>
+                <div class="tags" id="tags"></div>
+                <main id="list" class="manage-list"></main>
+            </div>
+        </div>
+    </body>
 </html>

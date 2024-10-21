@@ -41,7 +41,7 @@ export class Item {
     <div class="item-image">
       <img src="${image}" alt="${title}" />
     </div>
-    <div class="item-title">${title}</div>
+    <div class="item-title"><span>${title}</span></div>
     <div class="item-actions" id="actions">
       ${button.outerHTML}
       ${button2.outerHTML}
