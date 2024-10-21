@@ -31,7 +31,10 @@ export class TagComponent extends Tag {
   constructor(id, name) {
     super(id, name);
   }
-  build() {
+  /**
+   * @param {Function} factory
+   */
+  build(factory) {
     this.component.id = this.id;
     this.component.classList.add("tag");
     const span = document.createElement("span");
@@ -45,22 +48,24 @@ export class TagComponent extends Tag {
         tags[i].id !== this.component.id && tags[i].classList.remove("active");
       }
       this.component.classList.add("active");
+
       this.name === "todos"
-        ? scientistFactory("default")
-        : scientistFactory("tag", this.name);
+        ? factory.call(this, "default")
+        : factory.call(this, "tag", this.name);
     });
   }
 }
 
 /**
  * @returns {Promise<TagComponent[]>}
+ * @param {Function} factory
  */
-export async function tagFactory() {
+export async function tagFactory(factory) {
   const data = await getData();
   const array = [...data, new Tag(data.length + 1, "todos")].toReversed();
   const component = array.map(({ id, name }) => {
     const tag = new TagComponent(`tag-${id}`, name);
-    tag.build();
+    tag.build(factory);
     return tag;
   });
 

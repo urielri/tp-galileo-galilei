@@ -3,6 +3,9 @@
     flex-direction: column;
     gap: calc(var(--size) * 4);
     width: 100%;
+    .search {
+        max-width: 100%;
+    }
 }
 header {
     display: flex;
@@ -16,7 +19,6 @@ header {
 
     .search {
         width: 100%;
-        max-width: 100%;
     }
     h2 {
         font-size: 2em;
@@ -289,7 +291,7 @@ section {
     max-width: 1000px;
     width: 100%;
     margin: 0 auto;
-    padding: calc(var(--size) * 8) 0;
+    padding: 0 0 calc(var(--size) * 8);
 }
 .item {
     display: flex;
@@ -308,7 +310,7 @@ section {
 .item-image {
     width: 72px;
     height: 72px;
-    border-radius: 72px;
+    border-radius: 18px;
     overflow: hidden;
 }
 .item-image img {
@@ -322,6 +324,7 @@ section {
     border-radius: calc(var(--size) * 1.5);
     background-color: var(--white-00);
     font-weight: 500;
+    width: fit-content;
     cursor: pointer;
     transition: all 0.2s;
     &:hover {
@@ -358,4 +361,20 @@ section {
 .item .item-actions {
     display: flex;
     gap: calc(var(--size) * 2);
+}
+.modal-form {
+    display: flex;
+    z-index: 43;
+    flex-direction: column;
+    gap: calc(var(--size) * 2);
+    background-color: var(--white-00);
+    padding: 0 !important;
+    min-height: 300px;
+    border-radius: calc(var(--size) * 2);
+    overflow: hidden;
+}
+
+.modal-form input {
+    width: 100%;
+    padding: calc(var(--size) * 2);
 }

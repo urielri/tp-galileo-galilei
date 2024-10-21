@@ -11,7 +11,7 @@ export async function init() {
   /**
    * Obtenemos los tags
    */
-  const tags = await tagFactory();
+  const tags = await tagFactory(scientistFactory);
   const tagsDiv = document.getElementById("tags");
 
   /**

@@ -1,6 +1,6 @@
 import { health } from "../service.js";
 import { finder } from "../utils.js";
-import { manageFactory } from "./manage.js";
+import { manageFactory, formModal } from "./manage.js";
 import { tagFactory } from "../tags.js";
 import { getData } from "../scientists.js";
 
@@ -13,12 +13,11 @@ import { getData } from "../scientists.js";
 export async function init() {
   const checkConnection = await health();
   console.log("Estado del servidor", checkConnection.status);
-  const inyect = document.getElementById("list");
 
   /**
    * Obtenemos los tags
    */
-  const tags = await tagFactory();
+  const tags = await tagFactory(manageFactory);
   const tagsDiv = document.getElementById("tags");
 
   /**
@@ -29,11 +28,18 @@ export async function init() {
   /**
    * Se agrega la funcionalidad al buscador
    */
-  await finder(getData);
+  await finder(manageFactory);
   /**
    * Se inyecta los items
    */
-  inyect.append(...(await manageFactory()));
+  await manageFactory("default");
+
+  /**
+   * Agregamos el evento click al boton Crear Scientist
+   */
+  document.getElementById("add").addEventListener("click", () => {
+    formModal("Crear scientist");
+  });
 }
 
 await init();

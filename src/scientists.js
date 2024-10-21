@@ -3,6 +3,7 @@ import {
   getScientistsByTag,
   getScientistsByTextSearched,
 } from "./service.js";
+import { createPortal } from "./utils.js";
 
 /**
  * @typedef {'default' | 'tag' | 'search'} Type
@@ -243,18 +244,4 @@ function phrasesComponent(container, phrases) {
     p.innerText = value;
     container.append(p);
   });
-}
-
-function createPortal() {
-  const portal = document.createElement("div");
-  portal.classList.add("portal");
-  portal.id = "portal";
-  portal.addEventListener("click", () => {
-    const modal = document.getElementsByClassName("modal");
-    modal[0].classList.remove("modal");
-    document.body.classList.remove("modalOpen");
-    portal.remove();
-  });
-
-  document.body.children[0].append(portal);
 }
