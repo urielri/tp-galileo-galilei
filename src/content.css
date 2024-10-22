@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: calc(var(--size) * 4);
     width: 100%;
+
     .search {
         max-width: 100%;
     }
@@ -377,4 +378,40 @@ section {
 .modal-form input {
     width: 100%;
     padding: calc(var(--size) * 2);
+}
+
+.modal-form h2 {
+    font-size: 2em;
+    text-align: start;
+    width: 100%;
+    padding: calc(var(--size) * 4) calc(var(--size) * 4) 0;
+}
+.form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: calc(var(--size) * 2);
+    padding: calc(var(--size) * 2) calc(var(--size) * 4);
+}
+.actions-form {
+    display: flex;
+    width: 100%;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: calc(var(--size) * 2);
+    border-radius: calc(var(--size) * 1.5);
+    border: 1px solid var(--grey-00);
+    outline: none;
+    &:focus {
+        border: 1px solid var(--black-01);
+    }
+}
+.actions-form button {
+    width: 100%;
+    border-radius: 0;
+}
+.actions-form button:first-child {
+    border-top: 1px solid var(--grey-00);
 }

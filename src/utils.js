@@ -157,5 +157,5 @@ export function scientistForm(data) {
   phrases.value = scientist.phrases.join("\n");
   web.value = scientist.web;
 
-  return createForm([career, name, about, image, tags, phrases, web], "form");
+  return createForm([name, career, about, image, tags, phrases, web], "form");
 }

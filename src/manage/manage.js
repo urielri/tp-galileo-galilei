@@ -81,16 +81,16 @@ export function formModal(text, data) {
   modal.appendChild(form);
   const actions = createActionsForm([
     {
-      text: "Confirmar",
-      callback: () => console.log(new FormData(form).get("name")),
-      priority: "primary",
-      id: "confirm",
-    },
-    {
       text: "Cancelar",
       callback: undefined,
       priority: "secondary",
       id: "cancel",
+    },
+    {
+      text: "Confirmar",
+      callback: () => console.log(new FormData(form).get("name")),
+      priority: "primary",
+      id: "confirm",
     },
   ]);
   modal.appendChild(actions);
