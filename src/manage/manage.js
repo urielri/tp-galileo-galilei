@@ -98,7 +98,7 @@ export function formModal(text, flow, data) {
     },
     {
       text: "Confirmar",
-      callback: () => actionFlow(data, flow, data.id),
+      callback: () => actionFlow(data, flow, data ? data.id : null),
       priority: "primary",
       id: "confirm",
     },
@@ -156,12 +156,14 @@ async function deleteItem(id) {
   inyectLoader("modal");
   try {
     const response = await deleteScientist(id);
-    if (response.status === 200) {
-      await manageFactory("scientist");
+    if (response.deleted === 1) {
+      await manageFactory("default");
       closePortal();
+      buildPopup("Scientist borrado con exito.", "popup-success");
     }
   } catch (e) {
-    console.log(e);
+    closePortal();
+    buildPopup("Hubo un error al procesar la solicitud.", "popup-error");
   }
 }
 
@@ -201,14 +203,24 @@ async function actionFlow(data, flow, id) {
         closePortal();
       }
     }
+    buildPopup("Operación realizada con exito.", "popup-success");
   } catch (error) {
-    console.log(error);
+    closePortal();
+    buildPopup("Hubo un error al procesar la solicitud.", "popup-error");
   }
 }
-
+function buildPopup(text, cl) {
+  const title = document.createElement("h2");
+  title.innerText = text;
+  title.style.color = "var(--white-00)";
+  title.style.fontSize = "16px";
+  title.style.textAlign = "start";
+  popup(title, cl);
+}
 function closePortal() {
   const portal = document.getElementById("portal");
   if (portal && portal.isConnected) {
+    document.body.classList.remove("modalOpen");
     portal.remove();
   }
 }
@@ -222,4 +234,15 @@ function inyectLoader(id) {
   container.append(loader);
   const parent = document.getElementById(id);
   parent.appendChild(container);
+}
+
+function popup(children, cl) {
+  const container = document.createElement("div");
+  container.classList.add("popup", cl);
+  container.append(children);
+  document.body.append(container);
+
+  setTimeout(() => {
+    container.remove();
+  }, 3000);
 }
