@@ -524,6 +524,11 @@ textarea {
         background-color: var(--black-00);
     }
 }
+.invisible {
+    inset: 0px;
+    position: fixed;
+    z-index: 3;
+}
 .loader-container {
     display: grid;
     place-items: center;

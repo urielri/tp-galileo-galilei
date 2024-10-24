@@ -98,7 +98,7 @@ export function formModal(text, flow, data) {
     },
     {
       text: "Confirmar",
-      callback: () => actionFlow(data, flow),
+      callback: () => actionFlow(data, flow, data.id),
       priority: "primary",
       id: "confirm",
     },
@@ -165,7 +165,7 @@ async function deleteItem(id) {
   }
 }
 
-async function actionFlow(data, flow) {
+async function actionFlow(data, flow, id) {
   const button = document.getElementById("confirm");
   button.style.backgroundColor = "var(--black-01)";
   button.style.cursor = "not-allowed";
@@ -185,16 +185,20 @@ async function actionFlow(data, flow) {
   try {
     if (flow === "edit") {
       button.innerText = "Actualizando...";
+      console.log("id", id);
+      data.id = id;
       const response = await updateScientist(data);
       console.log(response);
-      if (response.inserted === 1) {
+      if (response.updated === 1) {
         manageFactory("default");
         closePortal();
       }
     } else if (flow === "create") {
       button.innerText = "Creando...";
       const response = await createScientist(data);
-      if (response.status === 200) {
+      if (response.inserted === 1) {
+        manageFactory("default");
+        closePortal();
       }
     }
   } catch (error) {

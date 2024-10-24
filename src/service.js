@@ -77,7 +77,7 @@ export async function getTags() {
 export async function updateScientist(data) {
   try {
     const response = await fetch(`${getEnvironment()}/scientist`, {
-      method: "POST",
+      method: "PATCH",
       body: JSON.stringify(data),
     });
     return await response.json();

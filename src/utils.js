@@ -66,9 +66,10 @@ export function createPortal() {
   portal.classList.add("portal");
   portal.id = "portal";
   document.body.classList.add("modalOpen");
-  portal.addEventListener("click", () => {
-    const modal = document.getElementsByClassName("modal");
-    modal[0].classList.remove("modal");
+  const invisibleDiv = document.createElement("div");
+  invisibleDiv.classList.add("invisible");
+  portal.append(invisibleDiv);
+  invisibleDiv.addEventListener("click", () => {
     document.body.classList.remove("modalOpen");
     portal.remove();
   });
