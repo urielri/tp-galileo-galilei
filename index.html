@@ -1,56 +1,58 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TP Rivero Uriel</title>
-    <link href="./global.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./src/layout.css" />
-    <link rel="stylesheet" href="./src/content.css" />
-    <script blocking="render" async type="module" src="./main.js"></script>
-  </head>
-  <body>
-    <div class="root">
-      <header class="header content-grid">
-        <h1>Scientists</h1>
-        <div class="search">
-          <img src="./src/public/search.svg" /><input
-            type="text"
-            id="search"
-            autocomplete="off"
-            placeholder="Buscar texto en frases"
-          />
-        </div>
-        <div class="tags" id="tags"></div>
-      </header>
-      <section class="content-grid-rows content-grid">
-        <div class="items" id="articles"></div>
-      </section>
-      <footer class="content-grid-rows content-grid">
-        <div class="me">
-          <h3>Rivero Uriel</h3>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>TP Rivero Uriel</title>
+        <link href="./global.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./src/layout.css" />
+        <link rel="stylesheet" href="./src/content.css" />
+        <script blocking="render" async type="module" src="./main.js"></script>
+    </head>
+    <body>
+        <div class="root">
+            <header class="header content-grid">
+                <h1>Scientists</h1>
+                <div class="search">
+                    <img src="./src/public/search.svg" /><input
+                        type="text"
+                        id="search"
+                        autocomplete="off"
+                        placeholder="Buscar texto en frases"
+                    />
+                </div>
+                <div class="tags" id="list-tags"></div>
+            </header>
+            <section class="content-grid-rows content-grid">
+                <div class="items" id="articles"></div>
+            </section>
+            <footer class="content-grid-rows content-grid">
+                <div class="me">
+                    <h3>Rivero Uriel</h3>
 
-          <div class="social">
-            <div class="icon">
-              <a href="https://github.com/urielri" target="_blank"
-                ><img src="./src/public/github.svg"
-              /></a>
-            </div>
-            <div class="icon">
-              <a href="https://www.behance.net/urielri" target="_blank"
-                ><img src="./src/public/behance.svg"
-              /></a>
-            </div>
-            <div class="icon">
-              <a
-                href="https://www.linkedin.com/in/uriel-rivero/"
-                target="_blank"
-                ><img src="./src/public/linkedin.svg"
-              /></a>
-            </div>
-          </div>
+                    <div class="social">
+                        <div class="icon">
+                            <a href="https://github.com/urielri" target="_blank"
+                                ><img src="./src/public/github.svg"
+                            /></a>
+                        </div>
+                        <div class="icon">
+                            <a
+                                href="https://www.behance.net/urielri"
+                                target="_blank"
+                                ><img src="./src/public/behance.svg"
+                            /></a>
+                        </div>
+                        <div class="icon">
+                            <a
+                                href="https://www.linkedin.com/in/uriel-rivero/"
+                                target="_blank"
+                                ><img src="./src/public/linkedin.svg"
+                            /></a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </footer>
-    </div>
-  </body>
+    </body>
 </html>
