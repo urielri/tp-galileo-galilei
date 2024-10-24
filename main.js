@@ -12,7 +12,7 @@ export async function init() {
    * Obtenemos los tags
    */
   const tags = await tagFactory(scientistFactory);
-  const tagsDiv = document.getElementById("tags");
+  const tagsDiv = document.getElementById("list-tags");
 
   /**
    * Inyectamos los tags al DOM

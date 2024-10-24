@@ -92,7 +92,6 @@ export class Scientist {
       if (!this.container.classList.contains("modal")) {
         createPortal();
         this.container.classList.add("modal");
-        document.body.classList.add("modalOpen");
       }
     });
 

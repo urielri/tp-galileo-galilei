@@ -18,7 +18,7 @@ export async function init() {
    * Obtenemos los tags
    */
   const tags = await tagFactory(manageFactory);
-  const tagsDiv = document.getElementById("tags");
+  const tagsDiv = document.getElementById("list-tags");
 
   /**
    * Inyectamos los tags al DOM
@@ -38,7 +38,7 @@ export async function init() {
    * Agregamos el evento click al boton Crear Scientist
    */
   document.getElementById("add").addEventListener("click", () => {
-    formModal("Crear scientist");
+    formModal("Crear scientist", "create");
   });
 }
 

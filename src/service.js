@@ -73,3 +73,39 @@ export async function getTags() {
     throw new Error("No se pudo obtener los tags");
   }
 }
+
+export async function updateScientist(data) {
+  try {
+    const response = await fetch(`${getEnvironment()}/scientist`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  } catch (error) {
+    throw new Error("No se pudo actualizar el cientifico");
+  }
+}
+
+export async function deleteScientist(id) {
+  try {
+    const response = await fetch(`${getEnvironment()}/scientist/${id}`, {
+      method: "DELETE",
+    });
+    return await response.json();
+  } catch (error) {
+    throw new Error("No se pudo eliminar el cientifico");
+  }
+}
+
+export async function createScientist(data) {
+  console.log(data);
+  try {
+    const response = await fetch(`${getEnvironment()}/scientist`, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  } catch (error) {
+    throw new Error("No se pudo crear el cientifico");
+  }
+}
