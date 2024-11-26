@@ -21,6 +21,15 @@ export async function init() {
 
   await finder(scientistFactory);
   await scientistFactory("default");
+
+  document.addEventListener("click", () => {
+    const scientist = document.getElementsByClassName("scientist modal");
+    if (!document.getElementById("portal")) {
+      if (scientist) {
+        scientist[0].classList.remove("modal");
+      }
+    }
+  });
 }
 
 await init();
